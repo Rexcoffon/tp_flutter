@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tp_flutter/app_routes.dart';
 import 'package:tp_flutter/modules/model/homeTile_model.dart';
 import 'package:tp_flutter/screens/home/widgets/tile_home.dart';
 
@@ -12,6 +13,20 @@ class _HomeScreenState extends State<HomeScreen> {
     HomeTileModel(
         title: 'Toto', date: DateTime.now(), text: '299', imagePath: ''),
   ];
+
+  navigateToDetails(
+      {required HomeTileModel arguments, required int position}) async {
+    bool? resultat = await Navigator.pushNamed(context, kNoteDetailsRoute,
+        arguments: arguments) as bool?;
+
+    print("arguments récupérés de l'écran de détails : $resultat");
+
+    if (resultat != null) {
+      setState(() {
+        tileElements[position].isChecked = resultat;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -133,9 +148,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     return Container();
                   },
                 )*/
-                TileHome(
-                  element: tileElements[0],
-                ),
+                InkWell(
+                  onTap: () => navigateToDetails(
+                      arguments: tileElements[0], position: 0),
+                  child: TileHome(
+                    element: tileElements[0],
+                  ),
+                )
               ],
             )
           ],
