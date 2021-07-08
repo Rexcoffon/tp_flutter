@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tp_flutter/home/home_screen.dart';
+import 'package:tp_flutter/screens/home_screen.dart';
 
 const kMainRoute = '/';
 
