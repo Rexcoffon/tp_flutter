@@ -19,16 +19,6 @@ class _NoteDetailsScreenState extends State<NoteDetailsScreen> {
     super.initState();
   }
 
-  backToHistory(context, bool result) {
-    Navigator.of(context).pop(result);
-  }
-
-  changeButton() {
-    setState(() {
-      isChecked = !isChecked;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -44,7 +34,11 @@ class _NoteDetailsScreenState extends State<NoteDetailsScreen> {
           elevation: 0,
           title: Text(
             'MA NOTE',
-            style: TextStyle(color: Colors.black),
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 30,
+            ),
           ),
           centerTitle: true,
           backgroundColor: Colors.transparent,
@@ -53,20 +47,28 @@ class _NoteDetailsScreenState extends State<NoteDetailsScreen> {
           padding: const EdgeInsets.all(8.0),
           child: Center(
             child: Container(
-              child: Row(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Column(
-                    children: [
-                      /*Hero(
-                          tag: 'my_image',
-                          child: Image.asset('assets/images/logo.png')),*/
-                      Text(widget.data.title),
-                      Text(widget.data.date.toString()),
-                      Text(widget.data.text.toString()),
-                    ],
+                  Text(
+                    widget.data.title,
+                    style: TextStyle(fontSize: 25, fontWeight: FontWeight.w700),
                   ),
+                  Text(
+                    widget.data.date.toString(),
+                    style: TextStyle(color: Colors.black.withOpacity(0.5)),
+                  ),
+                  Padding(padding: EdgeInsets.only(bottom: 30)),
+                  Container(
+                    width: MediaQuery.of(context).size.width * 0.8,
+                    child: Text(
+                      widget.data.text,
+                      textAlign: TextAlign.left,
+                    ),
+                  ),
+                  /*Hero(
+                      tag: 'my_image',
+                      child: Image.asset('assets/images/logo.png')),*/
                 ],
               ),
             ),
